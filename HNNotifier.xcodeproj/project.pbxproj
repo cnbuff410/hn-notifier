@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B28E4BF61999CF0D000B7FCE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E4BF51999CF0D000B7FCE /* main.swift */; };
+		B28E4BF81999CF0D000B7FCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E4BF71999CF0D000B7FCE /* AppDelegate.swift */; };
+		B28E4BFA1999CF0D000B7FCE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B28E4BF91999CF0D000B7FCE /* Images.xcassets */; };
+		B28E4BFD1999CF0D000B7FCE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B28E4BFB1999CF0D000B7FCE /* MainMenu.xib */; };
+		B28E4C091999CF0E000B7FCE /* HNNotifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28E4C081999CF0E000B7FCE /* HNNotifierTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B28E4C031999CF0E000B7FCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B28E4BE81999CF0D000B7FCE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B28E4BEF1999CF0D000B7FCE;
+			remoteInfo = HNNotifier;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B28E4BF01999CF0D000B7FCE /* HNNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HNNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B28E4BF41999CF0D000B7FCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B28E4BF51999CF0D000B7FCE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B28E4BF71999CF0D000B7FCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B28E4BF91999CF0D000B7FCE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B28E4BFC1999CF0D000B7FCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		B28E4C021999CF0E000B7FCE /* HNNotifierTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HNNotifierTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B28E4C071999CF0E000B7FCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B28E4C081999CF0E000B7FCE /* HNNotifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HNNotifierTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B28E4BED1999CF0D000B7FCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B28E4BFF1999CF0E000B7FCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B28E4BE71999CF0D000B7FCE = {
+			isa = PBXGroup;
+			children = (
+				B28E4BF21999CF0D000B7FCE /* HNNotifier */,
+				B28E4C051999CF0E000B7FCE /* HNNotifierTests */,
+				B28E4BF11999CF0D000B7FCE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B28E4BF11999CF0D000B7FCE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B28E4BF01999CF0D000B7FCE /* HNNotifier.app */,
+				B28E4C021999CF0E000B7FCE /* HNNotifierTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B28E4BF21999CF0D000B7FCE /* HNNotifier */ = {
+			isa = PBXGroup;
+			children = (
+				B28E4BF71999CF0D000B7FCE /* AppDelegate.swift */,
+				B28E4BF91999CF0D000B7FCE /* Images.xcassets */,
+				B28E4BFB1999CF0D000B7FCE /* MainMenu.xib */,
+				B28E4BF31999CF0D000B7FCE /* Supporting Files */,
+			);
+			path = HNNotifier;
+			sourceTree = "<group>";
+		};
+		B28E4BF31999CF0D000B7FCE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B28E4BF41999CF0D000B7FCE /* Info.plist */,
+				B28E4BF51999CF0D000B7FCE /* main.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B28E4C051999CF0E000B7FCE /* HNNotifierTests */ = {
+			isa = PBXGroup;
+			children = (
+				B28E4C081999CF0E000B7FCE /* HNNotifierTests.swift */,
+				B28E4C061999CF0E000B7FCE /* Supporting Files */,
+			);
+			path = HNNotifierTests;
+			sourceTree = "<group>";
+		};
+		B28E4C061999CF0E000B7FCE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B28E4C071999CF0E000B7FCE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B28E4BEF1999CF0D000B7FCE /* HNNotifier */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B28E4C0C1999CF0E000B7FCE /* Build configuration list for PBXNativeTarget "HNNotifier" */;
+			buildPhases = (
+				B28E4BEC1999CF0D000B7FCE /* Sources */,
+				B28E4BED1999CF0D000B7FCE /* Frameworks */,
+				B28E4BEE1999CF0D000B7FCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HNNotifier;
+			productName = HNNotifier;
+			productReference = B28E4BF01999CF0D000B7FCE /* HNNotifier.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B28E4C011999CF0E000B7FCE /* HNNotifierTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B28E4C0F1999CF0E000B7FCE /* Build configuration list for PBXNativeTarget "HNNotifierTests" */;
+			buildPhases = (
+				B28E4BFE1999CF0E000B7FCE /* Sources */,
+				B28E4BFF1999CF0E000B7FCE /* Frameworks */,
+				B28E4C001999CF0E000B7FCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B28E4C041999CF0E000B7FCE /* PBXTargetDependency */,
+			);
+			name = HNNotifierTests;
+			productName = HNNotifierTests;
+			productReference = B28E4C021999CF0E000B7FCE /* HNNotifierTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B28E4BE81999CF0D000B7FCE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				TargetAttributes = {
+					B28E4BEF1999CF0D000B7FCE = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					B28E4C011999CF0E000B7FCE = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = B28E4BEF1999CF0D000B7FCE;
+					};
+				};
+			};
+			buildConfigurationList = B28E4BEB1999CF0D000B7FCE /* Build configuration list for PBXProject "HNNotifier" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B28E4BE71999CF0D000B7FCE;
+			productRefGroup = B28E4BF11999CF0D000B7FCE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B28E4BEF1999CF0D000B7FCE /* HNNotifier */,
+				B28E4C011999CF0E000B7FCE /* HNNotifierTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B28E4BEE1999CF0D000B7FCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B28E4BFA1999CF0D000B7FCE /* Images.xcassets in Resources */,
+				B28E4BFD1999CF0D000B7FCE /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B28E4C001999CF0E000B7FCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B28E4BEC1999CF0D000B7FCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B28E4BF81999CF0D000B7FCE /* AppDelegate.swift in Sources */,
+				B28E4BF61999CF0D000B7FCE /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B28E4BFE1999CF0E000B7FCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B28E4C091999CF0E000B7FCE /* HNNotifierTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B28E4C041999CF0E000B7FCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B28E4BEF1999CF0D000B7FCE /* HNNotifier */;
+			targetProxy = B28E4C031999CF0E000B7FCE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B28E4BFB1999CF0D000B7FCE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B28E4BFC1999CF0D000B7FCE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B28E4C0A1999CF0E000B7FCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B28E4C0B1999CF0E000B7FCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B28E4C0D1999CF0E000B7FCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = HNNotifier/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B28E4C0E1999CF0E000B7FCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = HNNotifier/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B28E4C101999CF0E000B7FCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HNNotifierTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HNNotifier.app/Contents/MacOS/HNNotifier";
+			};
+			name = Debug;
+		};
+		B28E4C111999CF0E000B7FCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HNNotifierTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HNNotifier.app/Contents/MacOS/HNNotifier";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B28E4BEB1999CF0D000B7FCE /* Build configuration list for PBXProject "HNNotifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B28E4C0A1999CF0E000B7FCE /* Debug */,
+				B28E4C0B1999CF0E000B7FCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B28E4C0C1999CF0E000B7FCE /* Build configuration list for PBXNativeTarget "HNNotifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B28E4C0D1999CF0E000B7FCE /* Debug */,
+				B28E4C0E1999CF0E000B7FCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B28E4C0F1999CF0E000B7FCE /* Build configuration list for PBXNativeTarget "HNNotifierTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B28E4C101999CF0E000B7FCE /* Debug */,
+				B28E4C111999CF0E000B7FCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B28E4BE81999CF0D000B7FCE /* Project object */;
+}
