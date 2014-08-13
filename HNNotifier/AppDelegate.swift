@@ -31,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusBarItem.menu = menu
         menu.delegate = self
         
+        updatePost(self)
         updateStatusBar()
         updateMenu()
         timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updatePost:"), userInfo: nil, repeats: true)
@@ -66,8 +67,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if menuItemForPost.count == 0 {
             menu.addItemWithTitle("N/A", action: nil, keyEquivalent: "")
         } else {
+            // Don't jam the menu, only show up to updateCntLimit amount of posts
+            var endIndex = menuItemForPost.count > updateCntLimit ? updateCntLimit : menuItemForPost.count
+            println("endIndex is \(endIndex), count is \(menuItemForPost.count)")
             for item in menuItemForPost {
-                menu.addItem(item)
+                println(item.description)
+            }
+            for i in 0..<endIndex {
+                menu.addItem(menuItemForPost[i])
             }
         }
         
@@ -78,9 +85,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     // MARK: - Selectors
+    
     func updatePost(sender: AnyObject) {
-        menuItemForPost.removeAll(keepCapacity: false)
-        
         let request:NSURLRequest = NSURLRequest(URL: NSURL(string: apiLink))
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var reply = NSString(data: data, encoding: NSUTF8StringEncoding)
@@ -97,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                                     let menuItem = NSMenuItem()
                                     menuItem.title = posts[i]["title"].string!
                                     menuItem.action = Selector("openLink:")
-                                    self.menuItemForPost.append(menuItem)
+                                    self.menuItemForPost.insert(menuItem, atIndex: 0)
                                 } else {
                                     break
                                 }
@@ -116,6 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func openLink(sender: AnyObject) {
+        println("In openlink")
         NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("https://news.ycombinator.com/newest"))
     }
     
@@ -128,15 +135,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func menuWillOpen(menu: NSMenu!) {
         menuOpenDate = NSDate()
+        updateMenu()
     }
     
     func menuDidClose(menu: NSMenu!) {
         let duration = NSDate().timeIntervalSinceDate(menuOpenDate)
-        if duration > 3 {
+        if duration > 1 {
             // Assume user glanced over all items, clear
             menuItemForPost.removeAll(keepCapacity: false)
             updateStatusBar()
-            updateMenu()
         }
     }
 }
