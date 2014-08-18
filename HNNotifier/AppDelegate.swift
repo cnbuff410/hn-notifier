@@ -165,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func openPreference(sender: AnyObject) {
         println("open preference")
-        self.window.orderFront(sender)
+        self.window.orderFrontRegardless()
     }
     
     func exit(sender: AnyObject) {
