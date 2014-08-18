@@ -10,11 +10,18 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                             
-    @IBOutlet weak var window: NSWindow!
+    @IBOutlet var window: NSWindow!
+    @IBOutlet weak var updateIntervalInputField: NSTextField!
+    @IBOutlet weak var postCntInputField: NSTextField!
+    
+    // User defaults keys
+    let keyUpdateInterval = "update_interval"
+    let keyPostCnt = "post_count"
+    let keyObjectId = "object_id"
     
     let apiLink = "http://hn.algolia.com/api/v1/search_by_date?tags=story"
     let hackerNewsLink = "https://news.ycombinator.com/newest"
-    let updateCntLimit = 10
+    let postCntLimit = 50   // It doesn't make sense to have more than 50 items in the menu
     var preObjectId = 0
 
     var statusBar = NSStatusBar.systemStatusBar()
@@ -24,6 +31,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var menuItemForPost = [NSMenuItem]()
     var timer: NSTimer!
     var menuOpenDate: NSDate!
+    
+    var postCnt: Int = 0
+    var updateIntervalInMinute: Int = 0
 
     override func awakeFromNib() {
         // Add statusBarItem
@@ -31,18 +41,48 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusBarItem.menu = menu
         menu.delegate = self
         
-        updatePost(self)
+        postCnt = NSUserDefaults.standardUserDefaults().integerForKey(keyPostCnt)
+        updateIntervalInMinute = NSUserDefaults.standardUserDefaults().integerForKey(keyUpdateInterval)
+        preObjectId = NSUserDefaults.standardUserDefaults().integerForKey(keyObjectId)
+        // Default value for first time use
+        if postCnt == 0 { postCnt = 20 }
+        if updateIntervalInMinute == 0 { updateIntervalInMinute = 1 }
+        
+        updatePost()
         updateStatusBar()
-        updateMenu()
-        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("updatePost:"), userInfo: nil, repeats: true)
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(
+            NSTimeInterval(updateIntervalInMinute) * 60, target: self, selector: "updatePost", userInfo: nil, repeats: true)
     }
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        self.window.orderOut(self)
     }
     
     func applicationWillTerminate(aNotification: NSNotification?) {
         // Insert code here to tear down your application
+    }
+    
+    @IBAction func onPreferenceConfirm(sender: AnyObject) {
+        if updateIntervalInputField.integerValue > 0 {
+            updateIntervalInMinute = updateIntervalInputField.integerValue
+            NSUserDefaults.standardUserDefaults().setInteger(updateIntervalInMinute, forKey: keyUpdateInterval)
+            timer.invalidate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(
+                NSTimeInterval(60 * updateIntervalInMinute), target: self, selector: "updatePost", userInfo: nil, repeats: true)
+        }
+        if postCntInputField.integerValue > 0 {
+            postCnt = postCntInputField.integerValue
+            if postCnt > postCntLimit {
+                postCnt = postCntLimit
+            }
+            NSUserDefaults.standardUserDefaults().setInteger(postCnt, forKey: keyPostCnt)
+        }
+        NSUserDefaults.standardUserDefaults().synchronize()
+        self.window.orderOut(sender)
+    }
+    
+    @IBAction func onPreferenceCancel(sender: AnyObject) {
+        self.window.orderOut(sender)
     }
     
     func updateStatusBar() {
@@ -54,7 +94,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func updateMenu() {
-        println("update menu")
         menu.removeAllItems()
         
         // Add menuItem to menu
@@ -67,54 +106,52 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if menuItemForPost.count == 0 {
             menu.addItemWithTitle("N/A", action: nil, keyEquivalent: "")
         } else {
-            // Don't jam the menu, only show up to updateCntLimit amount of posts
-            var endIndex = menuItemForPost.count > updateCntLimit ? updateCntLimit : menuItemForPost.count
-            println("endIndex is \(endIndex), count is \(menuItemForPost.count)")
-            for item in menuItemForPost {
-                println(item.description)
-            }
+            var endIndex = menuItemForPost.count > postCnt ? postCnt : menuItemForPost.count
             for i in 0..<endIndex {
                 menu.addItem(menuItemForPost[i])
             }
         }
         
         menu.addItem(NSMenuItem.separatorItem())
-        menu.addItemWithTitle("Option", action: Selector("exit:"), keyEquivalent: "")
+        menu.addItemWithTitle("Option", action: "openPreference:", keyEquivalent: "")
         menu.addItem(NSMenuItem.separatorItem())
-        menu.addItemWithTitle("Quit", action: Selector("exit:"), keyEquivalent: "")
+        menu.addItemWithTitle("Quit", action: "exit:", keyEquivalent: "")
     }
     
     // MARK: - Selectors
     
-    func updatePost(sender: AnyObject) {
+    func updatePost() {
         let request:NSURLRequest = NSURLRequest(URL: NSURL(string: apiLink))
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var reply = NSString(data: data, encoding: NSUTF8StringEncoding)
             let json = JSONValue(data)
             if let posts = json["hits"].array {
-                if posts.count > 0 {
-                    var endIndex = posts.count > self.updateCntLimit ? self.updateCntLimit : posts.count
-                    for i in 0...endIndex {
-                        if let id = posts[i]["objectID"].string {
-                            if let intId = id.toInt() {
-                                println(self.preObjectId)
-                                println(intId)
-                                if intId > self.preObjectId {
-                                    let menuItem = NSMenuItem()
-                                    menuItem.title = posts[i]["title"].string!
-                                    menuItem.action = Selector("openLink:")
-                                    self.menuItemForPost.insert(menuItem, atIndex: 0)
-                                } else {
-                                    break
-                                }
+                if posts.count <= 0 {
+                    return
+                }
+                var endIndex = posts.count > self.postCnt ? self.postCnt : posts.count
+                var incomingList = [NSMenuItem]()
+                for i in 0..<endIndex {
+                    if let id = posts[i]["objectID"].string {
+                        if let intId = id.toInt() {
+                            if intId > self.preObjectId {   // New post
+                                let menuItem = NSMenuItem()
+                                menuItem.title = posts[i]["title"].string!
+                                menuItem.action = Selector("openLink:")
+                                incomingList.append(menuItem)
+                            } else {
+                                break
                             }
                         }
                     }
-                    self.preObjectId = posts[0]["objectID"].string!.toInt()!
-                    if self.menuItemForPost.count > 0 {
-                        self.updateStatusBar()
-                        self.updateMenu()
-                    }
+                }
+                self.menuItemForPost = incomingList + self.menuItemForPost
+                self.preObjectId = posts[0]["objectID"].string!.toInt()!
+                NSUserDefaults.standardUserDefaults().setInteger(self.preObjectId, forKey: self.keyObjectId)
+                NSUserDefaults.standardUserDefaults().synchronize()
+                if self.menuItemForPost.count > 0 {
+                    self.updateStatusBar()
+                    self.updateMenu()
                 }
             }
         })
@@ -122,8 +159,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func openLink(sender: AnyObject) {
-        println("In openlink")
         NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("https://news.ycombinator.com/newest"))
+    }
+    
+    func openPreference(sender: AnyObject) {
+        println("open preference")
+        self.window.orderFront(sender)
     }
     
     func exit(sender: AnyObject) {
