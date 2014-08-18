@@ -56,6 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
+        self.window.orderOut(self)
     }
     
     func applicationWillTerminate(aNotification: NSNotification?) {
