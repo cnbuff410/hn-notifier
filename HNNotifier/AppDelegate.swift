@@ -21,6 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     let apiLink = "http://hn.algolia.com/api/v1/search_by_date?tags=story"
     let hackerNewsLink = "https://news.ycombinator.com/newest"
+    let noNewItemMsg = "Nothing new, Go back to WORK!"
     let postCntLimit = 50   // It doesn't make sense to have more than 50 items in the menu
     var preObjectId = 0
 
@@ -105,7 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(NSMenuItem.separatorItem())
         
         if menuItemForPost.count == 0 {
-            menu.addItemWithTitle("N/A", action: nil, keyEquivalent: "")
+            menu.addItemWithTitle(noNewItemMsg, action: nil, keyEquivalent: "")
         } else {
             var endIndex = menuItemForPost.count > postCnt ? postCnt : menuItemForPost.count
             for i in 0..<endIndex {
