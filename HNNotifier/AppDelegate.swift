@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let keyObjectId = "object_id"
     
     let apiLink = "http://hn.algolia.com/api/v1/search_by_date?tags=story"
+    let hackerNewsPostLinkPrefix = "https://news.ycombinator.com/item?id="
     let hackerNewsLink = "https://news.ycombinator.com/newest"
     let noNewItemMsg = "Nothing new, Go back to WORK!"
     let postCntLimit = 50   // It doesn't make sense to have more than 50 items in the menu
@@ -29,7 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var statusBarItem : NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
     var menuItem : NSMenuItem = NSMenuItem()
-    var menuItemForPost = [NSMenuItem]()
+    var unreadMenuItems = [NSMenuItem]()
+    var menuItemLinks = [String]()
     var timer: NSTimer!
     var menuOpenDate: NSDate!
     
@@ -88,7 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func updateStatusBar() {
-        if menuItemForPost.count > 0 {
+        if unreadMenuItems.count > 0 {
             statusBarItem.image = NSImage(named: "BarItemIconActive")
         } else {
             statusBarItem.image = NSImage(named: "BarItemIconInactive")
@@ -105,12 +107,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(menuItem)
         menu.addItem(NSMenuItem.separatorItem())
         
-        if menuItemForPost.count == 0 {
+        if unreadMenuItems.count == 0 {
             menu.addItemWithTitle(noNewItemMsg, action: nil, keyEquivalent: "")
         } else {
-            var endIndex = menuItemForPost.count > postCnt ? postCnt : menuItemForPost.count
+            var endIndex = unreadMenuItems.count > postCnt ? postCnt : unreadMenuItems.count
             for i in 0..<endIndex {
-                menu.addItem(menuItemForPost[i])
+                menu.addItem(unreadMenuItems[i])
             }
         }
         
@@ -132,26 +134,29 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                     return
                 }
                 var endIndex = posts.count > self.postCnt ? self.postCnt : posts.count
-                var incomingList = [NSMenuItem]()
+                var incomingStoryList = [NSMenuItem]()
+                var incomingLinkList = [String]()
                 for i in 0..<endIndex {
                     if let id = posts[i]["objectID"].string {
                         if let intId = id.toInt() {
                             if intId > self.preObjectId {   // New post
                                 let menuItem = NSMenuItem()
                                 menuItem.title = posts[i]["title"].string!
+                                menuItem.toolTip = "\(self.hackerNewsPostLinkPrefix)\(intId)"
                                 menuItem.action = Selector("openLink:")
-                                incomingList.append(menuItem)
+                                incomingStoryList.append(menuItem)
                             } else {
                                 break
                             }
                         }
                     }
                 }
-                self.menuItemForPost = incomingList + self.menuItemForPost
+                self.unreadMenuItems = incomingStoryList + self.unreadMenuItems
+                self.menuItemLinks = incomingLinkList + self.menuItemLinks
                 self.preObjectId = posts[0]["objectID"].string!.toInt()!
                 NSUserDefaults.standardUserDefaults().setInteger(self.preObjectId, forKey: self.keyObjectId)
                 NSUserDefaults.standardUserDefaults().synchronize()
-                if self.menuItemForPost.count > 0 {
+                if self.unreadMenuItems.count > 0 {
                     self.updateStatusBar()
                     self.updateMenu()
                 }
@@ -161,7 +166,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func openLink(sender: AnyObject) {
-        NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("https://news.ycombinator.com/newest"))
+        var item: NSMenuItem = sender as NSMenuItem
+        NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(item.toolTip))
     }
     
     func openPreference(sender: AnyObject) {
@@ -185,7 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let duration = NSDate().timeIntervalSinceDate(menuOpenDate)
         if duration > 1 {
             // Assume user glanced over all items, clear
-            menuItemForPost.removeAll(keepCapacity: false)
+            unreadMenuItems.removeAll(keepCapacity: false)
             updateStatusBar()
         }
     }
