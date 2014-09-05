@@ -30,10 +30,8 @@ icon to see what are the latest posts.
 
 .. image:: https://cloud.githubusercontent.com/assets/534284/4026469/1a1aaa40-2c1a-11e4-91b1-4045f6a2af8a.png
 
-If you happened to find one looks interesting, you can click on it, and the
-`"new" section of HN <https://news.ycombinator.com/newest>`_
-will be openned in your browser automatically. You can then either upvote it or
-leave comment.
+If you happened to find one looks interesting, you can click on it, and the HN page
+of this post will be openned in your browser automatically. You can then either upvote it or leave comment.
 
 Click your mouse again anywhere will make the post dialog disappear and the
 icon goes back to grey status.
