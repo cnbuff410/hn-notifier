@@ -125,7 +125,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     // MARK: - Selectors
     
     func updatePost() {
-        let request:NSURLRequest = NSURLRequest(URL: NSURL(string: apiLink))
+        let request:NSURLRequest = NSURLRequest(URL: NSURL(string: apiLink)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var reply = NSString(data: data, encoding: NSUTF8StringEncoding)
             let json = JSONValue(data)
@@ -167,7 +167,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func openLink(sender: AnyObject) {
         var item: NSMenuItem = sender as NSMenuItem
-        NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString(item.toolTip))
+        if let toolTip = item.toolTip {
+            NSWorkspace.sharedWorkspace().openURL(NSURL(string: toolTip)!)
+        }
     }
     
     func openPreference(sender: AnyObject) {
