@@ -58,11 +58,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             NSTimeInterval(updateIntervalInMinute) * 60, target: self, selector: "updatePost", userInfo: nil, repeats: true)
     }
     
-    func applicationDidFinishLaunching(aNotification: NSNotification?) {
+    func applicationDidFinishLaunching(aNotification: NSNotification) {
         self.window.orderOut(self)
     }
     
-    func applicationWillTerminate(aNotification: NSNotification?) {
+    func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
     
@@ -183,7 +183,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     // MARK: - Menu delegates
     
-    func menuWillOpen(menu: NSMenu!) {
+    func menuWillOpen(menu: NSMenu) {
         menuOpenDate = NSDate()
         updateMenu()
     }
