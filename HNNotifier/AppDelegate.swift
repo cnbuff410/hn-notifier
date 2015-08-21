@@ -127,8 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func updatePost() {
         let request:NSURLRequest = NSURLRequest(URL: NSURL(string: apiLink)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var reply = NSString(data: data, encoding: NSUTF8StringEncoding)
-            let json = JSON(data)
+            let json = JSON(data: data)
             if let posts = json["hits"].array {
                 if posts.count <= 0 {
                     return
