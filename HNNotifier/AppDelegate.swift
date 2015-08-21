@@ -128,7 +128,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let request:NSURLRequest = NSURLRequest(URL: NSURL(string: apiLink)!)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var reply = NSString(data: data, encoding: NSUTF8StringEncoding)
-            let json = JSONValue(data)
+            let json = JSON(data)
             if let posts = json["hits"].array {
                 if posts.count <= 0 {
                     return
@@ -162,11 +162,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 }
             }
         })
-        
     }
     
     func openLink(sender: AnyObject) {
-        var item: NSMenuItem = sender as NSMenuItem
+        var item: NSMenuItem = sender as! NSMenuItem
         if let toolTip = item.toolTip {
             NSWorkspace.sharedWorkspace().openURL(NSURL(string: toolTip)!)
         }
@@ -189,7 +188,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         updateMenu()
     }
     
-    func menuDidClose(menu: NSMenu!) {
+    func menuDidClose(menu: NSMenu) {
         let duration = NSDate().timeIntervalSinceDate(menuOpenDate)
         if duration > 1 {
             // Assume user glanced over all items, clear
